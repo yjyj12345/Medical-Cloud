@@ -1,0 +1,153 @@
+﻿package org.jpa;
+
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+/**
+ * Facade for entity Address.
+ * 
+ * @see Org.jpa.Address
+ * @author MyEclipse Persistence Tools
+ */
+@Stateless
+public class AddressFacade implements AddressFacadeLocal {
+	// property constants
+	public static final String ADDRESS = "address";
+	public static final String COUNTRY = "country";
+
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	/**
+	 * Perform an initial save of a previously unsaved Address entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method.
+	 * 
+	 * @param entity
+	 *            Address entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Address entity) {
+		LogUtil.log("saving Address instance", Level.INFO, null);
+		try {
+			entityManager.persist(entity);
+			LogUtil.log("save successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			LogUtil.log("save failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Delete a persistent Address entity.
+	 * 
+	 * @param entity
+	 *            Address entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Address entity) {
+		LogUtil.log("deleting Address instance", Level.INFO, null);
+		try {
+			entity = entityManager.getReference(Address.class, entity.getAddressId());
+			entityManager.remove(entity);
+			LogUtil.log("delete successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			LogUtil.log("delete failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Persist a previously saved Address entity and return it or a copy of it
+	 * to the sender. A copy of the Address entity parameter is returned when
+	 * the JPA persistence mechanism has not previously been tracking the
+	 * updated entity.
+	 * 
+	 * @param entity
+	 *            Address entity to update
+	 * @return Address the persisted Address entity instance, may not be the
+	 *         same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Address update(Address entity) {
+		LogUtil.log("updating Address instance", Level.INFO, null);
+		try {
+			Address result = entityManager.merge(entity);
+			LogUtil.log("update successful", Level.INFO, null);
+			return result;
+		} catch (RuntimeException re) {
+			LogUtil.log("update failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public Address findById(Long id) {
+		LogUtil.log("finding Address instance with id: " + id, Level.INFO, null);
+		try {
+			Address instance = entityManager.find(Address.class, id);
+			return instance;
+		} catch (RuntimeException re) {
+			LogUtil.log("find failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Find all Address entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Address property to query
+	 * @param value
+	 *            the property value to match
+	 * @return List<Address> found by query
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Address> findByProperty(String propertyName, final Object value) {
+		LogUtil.log("finding Address instance with property: " + propertyName + ", value: " + value, Level.INFO, null);
+		try {
+			final String queryString = "select model from Address model where model." + propertyName
+					+ "= :propertyValue";
+			Query query = entityManager.createQuery(queryString);
+			query.setParameter("propertyValue", value);
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			LogUtil.log("find by property name failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Address> findByAddress(Object address) {
+		return findByProperty(ADDRESS, address);
+	}
+
+	public List<Address> findByCountry(Object country) {
+		return findByProperty(COUNTRY, country);
+	}
+
+	/**
+	 * Find all Address entities.
+	 * 
+	 * @return List<Address> all Address entities
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Address> findAll() {
+		LogUtil.log("finding all Address instances", Level.INFO, null);
+		try {
+			final String queryString = "select model from Address model";
+			Query query = entityManager.createQuery(queryString);
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			LogUtil.log("find all failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+}
