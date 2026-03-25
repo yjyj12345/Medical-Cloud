@@ -1,0 +1,114 @@
+@CHARSET "UTF-8";
+ body
+ {
+ background-color : #CCFFCC;
+ align: center;
+ margin  : 0px 0px;
+ }
+ #domain_selection
+ {
+ background-color: pink;
+ background-image: url(../images/cloudservice.jpg);
+ margin-top  : 100px;
+ margin-left : auto;
+ margin-right : auto;
+ border :  10px solid #CCCCCC;
+ width : 450px;
+ height: 200px;
+ }
+#login
+ {
+ pisition: absolute;
+ width : 500px;
+ height: 260px;
+ border: 10px blue solid;
+ background-image:url("../images/Login.jpg");
+ text-align:center;
+ margin-top: 100px;
+ }
+ #container
+ {
+ width:100%;
+ margin:0 auto;
+ border:1px #FF0000 solid;
+ }
+  #header
+ {
+ width:100%;
+ height: 100px;
+ float:left;
+ clear:both;
+ border:1px #FF00FF solid;
+ background-color:#0CF;
+ background : #050c14 url("../images/headerBack.png") no-repeat top right;
+  }
+ #header_left
+ {
+ width: 20%;
+ height:96%;
+ border: 1px #000000 solid;
+ float: left;
+ display:inline;
+ }
+  .site-title
+ {
+ position: absolute;
+ top: 34px;
+ left: 65px;
+ color: #00ff00;
+ font-size: 1.3em;
+ font-weight: 900;
+ outline: none;
+ text-decoration: none;
+ text-color: red;
+ float: left;
+ display : block;
+ }
+ #header_right
+ {
+ width : 20%;
+ height:96%;
+ border: 1px #FF00FF solid;
+ float:right;
+ display:inline;
+}
+#header_middle
+ {  
+ min-width:59.5%;
+ height:96%;
+ border: 1px #00FF00 solid;
+ float:left;
+ display:inline;  
+}       
+#portfolio
+ {
+ width:100%;
+ height:25px;
+ font-size: 1.05em;
+ font-weight: 900;
+ float:left;
+ clear:both;
+ border:1px #00AABB solid;
+ background-color:pink;
+}
+#main
+ { 
+ width:100%;
+ position:absolute;
+ top: 127px;
+ bottom:22px;
+ float:left;
+ border: 2px #00AAEE solid; 
+}
+#contentnav
+ {
+ position:absolute;
+ width: 280px;
+ height:99.5%;
+ float: left;
+ border: 2px #FFAA00 solid;
+ background-color:#DDD;
+ display:inline; 
+ overflow-y: auto;
+ }
+ 
